@@ -1,0 +1,112 @@
+<div class="page-header">
+  <h1>Tasks</h1>
+</div>
+
+<!-- Mobile: floating action button -->
+<button nz-button nzType="primary" nzShape="circle" nzSize="large"
+        (click)="createTask()" class="create-fab" title="Create Task">
+  <nz-icon nzType="plus" nzTheme="outline" />
+</button>
+
+<!-- Toolbar: search only -->
+<div class="toolbar">
+  <nz-input-group nzPrefixIcon="search" class="search-box">
+    <input nz-input placeholder="Search by task name..."
+           [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)" />
+  </nz-input-group>
+
+  <!-- Desktop: inline button -->
+  <button nz-button nzType="primary" (click)="createTask()" class="create-btn-desktop">
+    <nz-icon nzType="plus" nzTheme="outline" /> Create Task
+  </button>
+</div>
+
+<!-- Table: desktop -->
+<div class="desktop-task-table">
+  <nz-table #taskTable [nzData]="filteredTasks()" nzSize="middle"
+            [nzShowPagination]="filteredTasks().length > 10" [nzPageSize]="10">
+    <thead>
+      <tr>
+        <th nzWidth="50px">ID</th>
+        <th [nzSortFn]="nameSort">Task Name</th>
+        <th [nzSortFn]="descSort">Description</th>
+        <th [nzSortFn]="statusSort" [nzFilters]="statusFilters" [nzFilterFn]="statusFilterFn" nzWidth="130px">Status</th>
+        <th [nzSortFn]="prioritySort" [nzFilters]="priorityFilters" [nzFilterFn]="priorityFilterFn" nzWidth="110px">Priority</th>
+        <th [nzSortFn]="assignedSort">Assigned To</th>
+        <th [nzSortFn]="createdDateSort" nzWidth="120px">Created Date</th>
+        <th [nzSortFn]="dueDateSort" nzWidth="120px">Due Date</th>
+        <th [nzSortFn]="notesSort">Notes</th>
+        <th nzWidth="140px">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (task of taskTable.data; track task.id; let i = $index) {
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>
+            <a class="task-link" (click)="viewTask(task.id)">{{ task.name }}</a>
+          </td>
+          <td class="desc-cell">{{ task.description || '—' }}</td>
+          <td><nz-tag [nzColor]="statusColor(task.status)">{{ task.status }}</nz-tag></td>
+          <td><nz-tag [nzColor]="priorityColor(task.priority)">{{ task.priority }}</nz-tag></td>
+          <td>
+            <div class="assigned">
+              <nz-avatar [nzText]="getInitials(task.assignedTo)" nzSize="small"
+                         style="background-color: #1b3f8b; font-size: 11px" />
+              <span>{{ task.assignedTo }}</span>
+            </div>
+          </td>
+          <td>{{ task.details.createdDate }}</td>
+          <td>{{ task.details.dueDate }}</td>
+          <td class="notes-cell">{{ task.details.notes || '—' }}</td>
+          <td>
+            <button nz-button nzType="link" nzSize="small" (click)="viewTask(task.id)" title="View">
+              <nz-icon nzType="eye" nzTheme="outline" />
+            </button>
+            <button nz-button nzType="link" nzSize="small" (click)="editTask(task.id)" title="Edit">
+              <nz-icon nzType="edit" nzTheme="outline" />
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>
+
+<!-- Cards: mobile -->
+<div class="mobile-task-cards">
+  @for (task of filteredTasks(); track task.id) {
+    <nz-card class="task-card" [nzBodyStyle]="{ padding: '10px 14px' }">
+      <div class="task-card-top">
+        <span class="task-card-name" (click)="viewTask(task.id)">{{ task.name }}</span>
+        <div class="task-card-actions">
+          <button nz-button nzType="link" nzSize="small" (click)="viewTask(task.id)" title="View">
+            <nz-icon nzType="eye" nzTheme="outline" />
+          </button>
+          <button nz-button nzType="link" nzSize="small" (click)="editTask(task.id)" title="Edit">
+            <nz-icon nzType="edit" nzTheme="outline" />
+          </button>
+        </div>
+      </div>
+      <div class="task-card-bottom">
+        <nz-tag [nzColor]="statusColor(task.status)">{{ task.status }}</nz-tag>
+        <nz-tag [nzColor]="priorityColor(task.priority)">{{ task.priority }}</nz-tag>
+        <span class="task-card-meta">{{ task.assignedTo }}</span>
+      </div>
+      @if (task.description) {
+        <div class="task-card-desc">{{ task.description }}</div>
+      }
+      <div class="task-card-dates">
+        <span>Created: {{ task.details.createdDate }}</span>
+        <span>Due: {{ task.details.dueDate }}</span>
+      </div>
+      @if (task.details.notes) {
+        <div class="task-card-notes">
+          <nz-icon nzType="message" nzTheme="outline" />
+          {{ task.details.notes }}
+        </div>
+      }
+    </nz-card>
+  }
+</div>
+

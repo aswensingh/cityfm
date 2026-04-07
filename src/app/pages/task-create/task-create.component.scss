@@ -1,0 +1,50 @@
+.wizard-steps { margin-bottom: 8px; }
+
+.wizard-body { min-height: 280px; }
+
+.wizard-form { max-width: 500px; }
+
+.review { max-width: 600px; }
+
+.wizard-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.spacer { flex: 1; }
+
+@media (max-width: 768px) {
+  .wizard-form, .review { max-width: 100%; }
+
+  .wizard-steps {
+    margin-bottom: 4px;
+
+    ::ng-deep {
+      .ant-steps-item-title {
+        font-size: 12px !important;
+        line-height: 1.3;
+      }
+
+      .ant-steps-item-icon {
+        margin-inline-end: 0;
+      }
+
+      .ant-steps-item-tail {
+        display: none !important;
+      }
+    }
+  }
+
+  .wizard-body {
+    min-height: 220px;
+  }
+
+  .wizard-nav {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+}

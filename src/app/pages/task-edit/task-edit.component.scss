@@ -1,0 +1,13 @@
+.edit-form {
+  max-width: 600px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .edit-form { max-width: 100%; }
+}

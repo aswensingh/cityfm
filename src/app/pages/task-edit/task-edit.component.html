@@ -1,0 +1,68 @@
+<div class="page-header">
+  <h1>Edit Task</h1>
+</div>
+
+<form nz-form [formGroup]="form" (ngSubmit)="onSubmit()" nzLayout="vertical" class="edit-form">
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="name">Task Name</nz-form-label>
+    <nz-form-control [nzErrorTip]="nameErr">
+      <input nz-input formControlName="name" id="name" placeholder="Task name" />
+      <ng-template #nameErr let-control>
+        @if (control.hasError('required')) { Task name is required }
+        @else if (control.hasError('minlength')) { Minimum 3 characters }
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="status">Status</nz-form-label>
+    <nz-form-control nzErrorTip="Status is required">
+      <nz-select formControlName="status" id="status" nzPlaceHolder="Select status">
+        @for (opt of statusOptions; track opt) {
+          <nz-option [nzValue]="opt" [nzLabel]="opt" />
+        }
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="priority">Priority</nz-form-label>
+    <nz-form-control nzErrorTip="Priority is required">
+      <nz-select formControlName="priority" id="priority" nzPlaceHolder="Select priority">
+        @for (opt of priorityOptions; track opt) {
+          <nz-option [nzValue]="opt" [nzLabel]="opt" />
+        }
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="assignedTo">Assigned To</nz-form-label>
+    <nz-form-control nzErrorTip="Assigned To is required">
+      <input nz-input formControlName="assignedTo" id="assignedTo" placeholder="Person responsible" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="description">Description</nz-form-label>
+    <nz-form-control>
+      <textarea nz-input formControlName="description" id="description"
+                placeholder="Task description" [nzAutosize]="{ minRows: 3, maxRows: 6 }"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="dueDate">Due Date</nz-form-label>
+    <nz-form-control>
+      <nz-date-picker formControlName="dueDate" id="dueDate"
+                      nzPlaceHolder="Select due date" style="width: 100%" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="actions">
+    <button nz-button nzType="primary" type="submit">
+      <nz-icon nzType="save" nzTheme="outline" /> Save Changes
+    </button>
+    <button nz-button nzType="default" type="button" (click)="cancel()">Cancel</button>
+  </nz-form-item>
+</form>

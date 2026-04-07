@@ -1,0 +1,81 @@
+{
+  "auth": {
+    "users": [
+      {
+        "username": "admin",
+        "password": "Admin@123",
+        "displayName": "Admin User",
+        "avatarUrl": "https://via.placeholder.com/150"
+      }
+    ]
+  },
+  "uiConfig": {
+    "toasts": {
+      "loginSuccess": "Login successful",
+      "loginError": "Invalid username or password",
+      "taskCreated": "Task created successfully",
+      "validationError": "Please fix validation errors"
+    },
+    "steps": [
+      "Task Information",
+      "Assignment Details",
+      "Review & Submit"
+    ]
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Design Login Screen",
+      "status": "In Progress",
+      "assignedTo": "John Doe",
+      "priority": "High",
+      "description": "Create responsive login screen with validation",
+      "imageUrl": "https://via.placeholder.com/300x200",
+      "details": {
+        "createdDate": "2026-03-01",
+        "dueDate": "2026-03-10",
+        "notes": "Ensure mobile-first design"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Implement Task Table",
+      "status": "Completed",
+      "assignedTo": "Jane Smith",
+      "priority": "Medium",
+      "description": "Display task list in table view",
+      "imageUrl": "https://via.placeholder.com/300x200",
+      "details": {
+        "createdDate": "2026-03-02",
+        "dueDate": "2026-03-08",
+        "notes": "Add sorting if possible"
+      }
+    }
+  ],
+  "formSchema": {
+    "createTask": {
+      "fields": [
+        {
+          "name": "taskName",
+          "label": "Task Name",
+          "type": "text",
+          "required": true,
+          "minLength": 3
+        },
+        {
+          "name": "assignedTo",
+          "label": "Assigned To",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "priority",
+          "label": "Priority",
+          "type": "select",
+          "options": ["Low", "Medium", "High"],
+          "required": true
+        }
+      ]
+    }
+  }
+}

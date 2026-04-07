@@ -1,0 +1,51 @@
+@if (task(); as task) {
+  <div class="nav">
+    <button nz-button nzType="default" (click)="goBack()">
+      <nz-icon nzType="arrow-left" nzTheme="outline" /> Back to Tasks
+    </button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1 class="title">{{ task.name }}</h1>
+      <div class="tags">
+        <nz-tag [nzColor]="statusColor(task.status)">{{ task.status }}</nz-tag>
+        <nz-tag [nzColor]="priorityColor(task.priority)">{{ task.priority }}</nz-tag>
+      </div>
+    </div>
+    <button nz-button nzType="primary" (click)="editTask()">
+      <nz-icon nzType="edit" nzTheme="outline" /> Edit
+    </button>
+  </div>
+
+  <!-- Task image -->
+  <div class="image-wrap">
+    <img [src]="task.imageUrl" [alt]="task.name" class="task-image" loading="lazy" />
+  </div>
+
+  <!-- Collapsible sections -->
+  <nz-collapse>
+    <nz-collapse-panel nzHeader="Task Details" [nzActive]="true">
+      <nz-descriptions nzBordered [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }">
+        <nz-descriptions-item nzTitle="Description">{{ task.description }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Assigned To">{{ task.assignedTo }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Created Date">{{ task.details.createdDate }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Due Date">{{ task.details.dueDate }}</nz-descriptions-item>
+      </nz-descriptions>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Additional Notes" [nzActive]="true">
+      <p class="notes">{{ task.details.notes }}</p>
+    </nz-collapse-panel>
+  </nz-collapse>
+} @else {
+  <nz-result nzStatus="404" nzTitle="Task Not Found"
+             nzSubTitle="The task you are looking for does not exist.">
+    <div nz-result-extra>
+      <button nz-button nzType="primary" (click)="goBack()">
+        <nz-icon nzType="arrow-left" nzTheme="outline" /> Back to Tasks
+      </button>
+    </div>
+  </nz-result>
+}

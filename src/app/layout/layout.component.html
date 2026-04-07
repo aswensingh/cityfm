@@ -1,0 +1,125 @@
+<!-- Desktop layout -->
+@if (!isMobile()) {
+  <nz-layout class="full-height">
+    <nz-sider
+      nzCollapsible
+      [nzCollapsed]="collapsed()"
+      (nzCollapsedChange)="collapsed.set($event)"
+      [nzWidth]="220"
+      [nzCollapsedWidth]="64"
+      class="sidebar"
+    >
+      <div class="logo">
+        @if (!collapsed()) {
+          <span>CityFM</span>
+        } @else {
+          <span>C</span>
+        }
+      </div>
+
+      <ul nz-menu nzMode="inline" nzTheme="dark">
+        <li nz-menu-item routerLink="/app/dashboard" routerLinkActive="ant-menu-item-selected">
+          <nz-icon nzType="dashboard" nzTheme="outline" />
+          <span>Dashboard</span>
+        </li>
+        <li nz-menu-item routerLink="/app/tasks" routerLinkActive="ant-menu-item-selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+          <nz-icon nzType="unordered-list" nzTheme="outline" />
+          <span>Tasks</span>
+        </li>
+        <li nz-menu-item routerLink="/app/tasks/create" routerLinkActive="ant-menu-item-selected">
+          <nz-icon nzType="plus-square" nzTheme="outline" />
+          <span>Create Task</span>
+        </li>
+      </ul>
+
+      @if (user(); as u) {
+        <div class="sidebar-footer">
+          <nz-avatar [nzSrc]="u.avatarUrl" [nzText]="getInitials(u.displayName)" nzSize="small" />
+          @if (!collapsed()) {
+            <span class="sidebar-name">{{ u.displayName }}</span>
+          }
+          <button nz-button nzType="text" nzSize="small" class="logout-btn" (click)="logout()" title="Logout">
+            <nz-icon nzType="logout" nzTheme="outline" />
+          </button>
+        </div>
+      }
+    </nz-sider>
+
+    <nz-layout>
+      @if (isMobile()) {
+        <nz-header class="topbar">
+          <button nz-button nzType="text" (click)="collapsed.set(!collapsed())">
+            <nz-icon [nzType]="collapsed() ? 'menu-unfold' : 'menu-fold'" nzTheme="outline" />
+          </button>
+        </nz-header>
+      }
+      <nz-content class="content">
+        <router-outlet />
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+}
+
+<!-- Mobile layout -->
+@if (isMobile()) {
+  <nz-layout class="full-height">
+    <nz-header class="topbar mobile-topbar">
+      <button nz-button nzType="text" (click)="drawerOpen.set(true)">
+        <nz-icon nzType="menu" nzTheme="outline" />
+      </button>
+      <span class="mobile-brand">CityFM</span>
+    </nz-header>
+    <nz-content class="content mobile-content">
+      <router-outlet />
+    </nz-content>
+  </nz-layout>
+
+  <nz-drawer
+    [nzVisible]="drawerOpen()"
+    nzPlacement="left"
+    [nzClosable]="false"
+    (nzOnClose)="drawerOpen.set(false)"
+    [nzWidth]="180"
+  >
+    <div *nzDrawerContent class="drawer-wrap">
+      <!-- Profile -->
+      @if (user(); as u) {
+        <div class="drawer-profile">
+          <nz-avatar [nzSrc]="u.avatarUrl" [nzText]="getInitials(u.displayName)" [nzSize]="40" />
+          <div>
+            <div class="drawer-user-name">{{ u.displayName }}</div>
+            <div class="drawer-user-role">Administrator</div>
+          </div>
+        </div>
+      }
+
+      <!-- Nav items (plain HTML, no nz-menu) -->
+      <nav class="drawer-nav">
+        <a class="drawer-nav-item" routerLink="/app/dashboard" routerLinkActive="active"
+           (click)="drawerOpen.set(false)">
+          <nz-icon nzType="dashboard" nzTheme="outline" />
+          Dashboard
+        </a>
+        <a class="drawer-nav-item" routerLink="/app/tasks" routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }" (click)="drawerOpen.set(false)">
+          <nz-icon nzType="unordered-list" nzTheme="outline" />
+          Tasks
+        </a>
+        <a class="drawer-nav-item" routerLink="/app/tasks/create" routerLinkActive="active"
+           (click)="drawerOpen.set(false)">
+          <nz-icon nzType="plus-square" nzTheme="outline" />
+          Create Task
+        </a>
+      </nav>
+
+      <!-- Logout -->
+      <div class="drawer-logout">
+        <button nz-button nzType="default" nzDanger nzBlock (click)="logout()">
+          <nz-icon nzType="logout" nzTheme="outline" />
+          Logout
+        </button>
+      </div>
+    </div>
+  </nz-drawer>
+}

@@ -1,0 +1,133 @@
+<!-- Welcome banner -->
+@if (user(); as u) {
+  <div class="welcome-banner">
+    <nz-avatar [nzSrc]="u.avatarUrl" [nzText]="u.displayName" nzSize="large" />
+    <div>
+      <h2>Welcome back, {{ u.displayName }}</h2>
+      <p>{{ today | date:'fullDate' }}</p>
+    </div>
+  </div>
+}
+
+<div class="page-header">
+  <h1>Dashboard</h1>
+</div>
+
+<!-- Stat cards: desktop grid -->
+<div class="card-grid desktop-stats">
+  <nz-card class="stat-card">
+    <div class="stat">
+      <nz-icon nzType="appstore" nzTheme="outline" class="icon total" />
+      <div class="info">
+        <span class="count">{{ totalTasks() }}</span>
+        <span class="label">Total Tasks</span>
+      </div>
+    </div>
+  </nz-card>
+
+  <nz-card class="stat-card">
+    <div class="stat">
+      <nz-icon nzType="sync" nzTheme="outline" class="icon progress" />
+      <div class="info">
+        <span class="count">{{ inProgress() }}</span>
+        <span class="label">In Progress</span>
+      </div>
+    </div>
+  </nz-card>
+
+  <nz-card class="stat-card">
+    <div class="stat">
+      <nz-icon nzType="check-circle" nzTheme="outline" class="icon done" />
+      <div class="info">
+        <span class="count">{{ completed() }}</span>
+        <span class="label">Completed</span>
+      </div>
+    </div>
+  </nz-card>
+
+  <nz-card class="stat-card">
+    <div class="stat">
+      <nz-icon nzType="clock-circle" nzTheme="outline" class="icon waiting" />
+      <div class="info">
+        <span class="count">{{ pending() }}</span>
+        <span class="label">Pending</span>
+      </div>
+    </div>
+  </nz-card>
+</div>
+
+<!-- Stat cards: mobile consolidated -->
+<nz-card class="mobile-stats" [nzBodyStyle]="{ padding: '16px' }">
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="stat-count total">{{ totalTasks() }}</span>
+      <span class="stat-label">Total</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-count progress">{{ inProgress() }}</span>
+      <span class="stat-label">In Progress</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-count done">{{ completed() }}</span>
+      <span class="stat-label">Completed</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-count waiting">{{ pending() }}</span>
+      <span class="stat-label">Pending</span>
+    </div>
+  </div>
+</nz-card>
+
+<!-- Recent tasks table -->
+<h3 class="section-title">Recent Tasks</h3>
+
+<!-- Card view for mobile -->
+<div class="mobile-task-cards">
+  @for (task of recentTasks(); track task.id) {
+    <nz-card class="task-card" [nzBodyStyle]="{ padding: '10px 14px' }" (click)="viewTask(task.id)">
+      <div class="task-card-top">
+        <span class="task-card-name">{{ task.name }}</span>
+        <nz-icon nzType="right" nzTheme="outline" class="task-card-arrow" />
+      </div>
+      <div class="task-card-bottom">
+        <nz-tag [nzColor]="statusColor(task.status)">{{ task.status }}</nz-tag>
+        <nz-tag [nzColor]="priorityColor(task.priority)">{{ task.priority }}</nz-tag>
+        <span class="task-card-assignee">{{ task.assignedTo }}</span>
+      </div>
+    </nz-card>
+  }
+</div>
+
+<!-- Table view for desktop -->
+<div class="desktop-task-table">
+  <nz-table #recentTable [nzData]="recentTasks()" nzSize="middle"
+            [nzShowPagination]="false" [nzFrontPagination]="false">
+    <thead>
+      <tr>
+        <th>Task Name</th>
+        <th nzWidth="130px">Status</th>
+        <th nzWidth="110px">Priority</th>
+        <th>Assigned To</th>
+        <th nzWidth="90px">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (task of recentTable.data; track task.id) {
+        <tr>
+          <td>{{ task.name }}</td>
+          <td><nz-tag [nzColor]="statusColor(task.status)">{{ task.status }}</nz-tag></td>
+          <td><nz-tag [nzColor]="priorityColor(task.priority)">{{ task.priority }}</nz-tag></td>
+          <td>{{ task.assignedTo }}</td>
+          <td>
+            <button nz-button nzType="link" nzSize="small" (click)="viewTask(task.id)">
+              <nz-icon nzType="eye" nzTheme="outline" /> View
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>

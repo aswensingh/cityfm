@@ -1,0 +1,50 @@
+<div class="login-wrapper">
+  <!-- Particle background -->
+  <ngx-particles
+    id="login-particles"
+    [options]="particlesOptions"
+    [particlesInit]="particlesInit"
+    class="particles-bg"
+  />
+
+  <nz-card class="login-card">
+    <div class="branding">
+      <h1>CityFM Asia</h1>
+      <p>Task Management Portal</p>
+    </div>
+
+    <form nz-form [formGroup]="form" (ngSubmit)="onSubmit()" nzLayout="vertical">
+      <nz-form-item>
+        <nz-form-label nzFor="username" nzRequired>Username</nz-form-label>
+        <nz-form-control nzErrorTip="Username is required">
+          <nz-input-group nzPrefixIcon="user">
+            <input nz-input formControlName="username" id="username"
+                   placeholder="Enter your username" autocomplete="username" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="password" nzRequired>Password</nz-form-label>
+        <nz-form-control nzErrorTip="Password is required">
+          <nz-input-group nzPrefixIcon="lock" [nzSuffix]="eyeTpl">
+            <input nz-input [type]="passwordVisible ? 'text' : 'password'"
+                   formControlName="password" id="password"
+                   placeholder="Enter your password" autocomplete="current-password" />
+          </nz-input-group>
+          <ng-template #eyeTpl>
+            <span style="cursor: pointer" (click)="passwordVisible = !passwordVisible">
+              <nz-icon [nzType]="passwordVisible ? 'eye' : 'eye-invisible'" nzTheme="outline" />
+            </span>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <button nz-button nzType="primary" nzBlock nzSize="large" type="submit" [nzLoading]="loading()" [disabled]="loading()">
+          Log In
+        </button>
+      </nz-form-item>
+    </form>
+  </nz-card>
+</div>
