@@ -13,7 +13,7 @@
         @if (!collapsed()) {
           <span>CityFM</span>
         } @else {
-          <span>C</span>
+          <img src="assets/images/logo.png" alt="CityFM" class="logo-icon" />
         }
       </div>
 
@@ -35,8 +35,8 @@
 
       @if (user(); as u) {
         <div class="sidebar-footer">
-          <nz-avatar [nzSrc]="u.avatarUrl" [nzText]="getInitials(u.displayName)" nzSize="small" />
           @if (!collapsed()) {
+            <nz-avatar [nzSrc]="u.avatarUrl" nzIcon="user" nzSize="small" />
             <span class="sidebar-name">{{ u.displayName }}</span>
           }
           <button nz-button nzType="text" nzSize="small" class="logout-btn" (click)="logout()" title="Logout">
@@ -86,7 +86,7 @@
       <!-- Profile -->
       @if (user(); as u) {
         <div class="drawer-profile">
-          <nz-avatar [nzSrc]="u.avatarUrl" [nzText]="getInitials(u.displayName)" [nzSize]="40" />
+          <nz-avatar [nzSrc]="u.avatarUrl" nzIcon="user" [nzSize]="40" />
           <div>
             <div class="drawer-user-name">{{ u.displayName }}</div>
             <div class="drawer-user-role">Administrator</div>

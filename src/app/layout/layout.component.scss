@@ -21,6 +21,13 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.logo-icon {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
 .sidebar-footer {
   position: absolute;
   bottom: 48px;

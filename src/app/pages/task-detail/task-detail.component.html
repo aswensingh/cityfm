@@ -19,10 +19,17 @@
     </button>
   </div>
 
-  <!-- Task image -->
-  <div class="image-wrap">
-    <img [src]="task.imageUrl" [alt]="task.name" class="task-image" loading="lazy" />
-  </div>
+  <!-- Task image / icon fallback -->
+  @if (!imgFailed()) {
+    <div class="image-wrap">
+      <img [src]="task.imageUrl" [alt]="task.name" class="task-image" loading="lazy"
+           (error)="imgFailed.set(true)" />
+    </div>
+  } @else {
+    <div class="icon-banner">
+      <nz-icon [nzType]="taskIcon(task.id)" nzTheme="outline" class="banner-icon" />
+    </div>
+  }
 
   <!-- Collapsible sections -->
   <nz-collapse>

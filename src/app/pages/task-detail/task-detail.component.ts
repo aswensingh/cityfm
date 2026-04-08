@@ -1,4 +1,4 @@
-import { Component, inject, input, computed, OnInit, numberAttribute } from '@angular/core';
+import { Component, inject, input, computed, signal, OnInit, numberAttribute } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzResultModule } from 'ng-zorro-antd/result';
@@ -26,9 +26,19 @@ export class TaskDetailComponent implements OnInit {
   readonly id = input.required<number, string>({ transform: numberAttribute });
 
   task = computed(() => this.taskService.tasks().find(t => t.id === this.id()) ?? null);
+  imgFailed = signal(false);
+
+  private icons = [
+    'project', 'code', 'bug', 'experiment', 'tool',
+    'rocket', 'bulb', 'flag', 'star', 'thunderbolt',
+  ];
 
   ngOnInit() {
     this.taskService.loadTasks();
+  }
+
+  taskIcon(id: number): string {
+    return this.icons[id % this.icons.length];
   }
 
   statusColor(status: string): string {

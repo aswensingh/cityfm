@@ -1,7 +1,7 @@
 <!-- Welcome banner -->
 @if (user(); as u) {
   <div class="welcome-banner">
-    <nz-avatar [nzSrc]="u.avatarUrl" [nzText]="u.displayName" nzSize="large" />
+    <nz-avatar [nzSrc]="u.avatarUrl" nzIcon="user" nzSize="large" />
     <div>
       <h2>Welcome back, {{ u.displayName }}</h2>
       <p>{{ today | date:'fullDate' }}</p>

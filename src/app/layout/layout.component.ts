@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -12,6 +12,7 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-layout',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterOutlet, RouterLink, RouterLinkActive,
     NzLayoutModule, NzMenuModule, NzIconModule,

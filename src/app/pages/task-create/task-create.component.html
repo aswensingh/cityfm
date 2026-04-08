@@ -2,114 +2,116 @@
   <h1>Create Task</h1>
 </div>
 
-<!-- Stepper -->
-<nz-steps [nzCurrent]="currentStep()" nzSize="small" nzLabelPlacement="vertical" class="wizard-steps">
-  @for (label of stepLabels; track label) {
-    <nz-step [nzTitle]="label" />
-  }
-</nz-steps>
+<div class="wizard-container">
+  <!-- Stepper -->
+  <nz-steps [nzCurrent]="currentStep()" nzSize="small" nzLabelPlacement="vertical" class="wizard-steps">
+    @for (label of stepLabels; track label) {
+      <nz-step [nzTitle]="label" />
+    }
+  </nz-steps>
 
-<nz-divider />
+  <nz-divider />
 
-<div class="wizard-body">
-  <!-- Step 1: Task Information -->
-  @if (currentStep() === 0) {
-    <form nz-form [formGroup]="step1" nzLayout="vertical" class="wizard-form">
-      <nz-form-item>
-        <nz-form-label nzRequired nzFor="taskName">Task Name</nz-form-label>
-        <nz-form-control [nzErrorTip]="nameErr">
-          <input nz-input formControlName="taskName" id="taskName" placeholder="Enter task name" />
-          <ng-template #nameErr let-control>
-            @if (control.hasError('required')) { Task name is required }
-            @else if (control.hasError('minlength')) { Minimum 3 characters }
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
+  <div class="wizard-body">
+    <!-- Step 1: Task Information -->
+    @if (currentStep() === 0) {
+      <form nz-form [formGroup]="step1" nzLayout="vertical" class="wizard-form">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="taskName">Task Name</nz-form-label>
+          <nz-form-control [nzErrorTip]="nameErr">
+            <input nz-input formControlName="taskName" id="taskName" placeholder="Enter task name" />
+            <ng-template #nameErr let-control>
+              @if (control.hasError('required')) { Task name is required }
+              @else if (control.hasError('minlength')) { Minimum 3 characters }
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nzFor="description">Description</nz-form-label>
-        <nz-form-control>
-          <textarea nz-input formControlName="description" id="description"
-                    placeholder="Optional description" rows="3"></textarea>
-        </nz-form-control>
-      </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="description">Description</nz-form-label>
+          <nz-form-control>
+            <textarea nz-input formControlName="description" id="description"
+                      placeholder="Optional description" rows="3"></textarea>
+          </nz-form-control>
+        </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nzRequired nzFor="priority">Priority</nz-form-label>
-        <nz-form-control nzErrorTip="Priority is required">
-          <nz-select formControlName="priority" id="priority" nzPlaceHolder="Select priority">
-            @for (opt of priorityOptions; track opt) {
-              <nz-option [nzValue]="opt" [nzLabel]="opt" />
-            }
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-  }
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="priority">Priority</nz-form-label>
+          <nz-form-control nzErrorTip="Priority is required">
+            <nz-select formControlName="priority" id="priority" nzPlaceHolder="Select priority">
+              @for (opt of priorityOptions; track opt) {
+                <nz-option [nzValue]="opt" [nzLabel]="opt" />
+              }
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    }
 
-  <!-- Step 2: Assignment Details -->
-  @if (currentStep() === 1) {
-    <form nz-form [formGroup]="step2" nzLayout="vertical" class="wizard-form">
-      <nz-form-item>
-        <nz-form-label nzRequired nzFor="assignedTo">Assigned To</nz-form-label>
-        <nz-form-control nzErrorTip="Assigned To is required">
-          <input nz-input formControlName="assignedTo" id="assignedTo" placeholder="Person responsible" />
-        </nz-form-control>
-      </nz-form-item>
+    <!-- Step 2: Assignment Details -->
+    @if (currentStep() === 1) {
+      <form nz-form [formGroup]="step2" nzLayout="vertical" class="wizard-form">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="assignedTo">Assigned To</nz-form-label>
+          <nz-form-control nzErrorTip="Assigned To is required">
+            <input nz-input formControlName="assignedTo" id="assignedTo" placeholder="Person responsible" />
+          </nz-form-control>
+        </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nzFor="dueDate">Due Date</nz-form-label>
-        <nz-form-control>
-          <nz-date-picker formControlName="dueDate" id="dueDate"
-                          nzPlaceHolder="Select due date" style="width: 100%" />
-        </nz-form-control>
-      </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="dueDate">Due Date</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker formControlName="dueDate" id="dueDate"
+                            nzPlaceHolder="Select due date" style="width: 100%" />
+          </nz-form-control>
+        </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nzFor="notes">Notes</nz-form-label>
-        <nz-form-control>
-          <textarea nz-input formControlName="notes" id="notes"
-                    placeholder="Optional notes" rows="3"></textarea>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-  }
+        <nz-form-item>
+          <nz-form-label nzFor="notes">Notes</nz-form-label>
+          <nz-form-control>
+            <textarea nz-input formControlName="notes" id="notes"
+                      placeholder="Optional notes" rows="3"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    }
 
-  <!-- Step 3: Review & Submit -->
-  @if (currentStep() === 2) {
-    <div class="review">
-      <nz-descriptions nzTitle="Review Your Task" nzBordered
-                       [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }">
-        <nz-descriptions-item nzTitle="Task Name">{{ step1.getRawValue().taskName }}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Priority">{{ step1.getRawValue().priority }}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Description">{{ step1.getRawValue().description || '—' }}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Assigned To">{{ step2.getRawValue().assignedTo }}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Due Date">{{ dueDateDisplay }}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Notes">{{ step2.getRawValue().notes || '—' }}</nz-descriptions-item>
-      </nz-descriptions>
-    </div>
-  }
-</div>
+    <!-- Step 3: Review & Submit -->
+    @if (currentStep() === 2) {
+      <div class="review">
+        <nz-descriptions nzTitle="Review Your Task" nzBordered
+                         [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }">
+          <nz-descriptions-item nzTitle="Task Name">{{ step1.getRawValue().taskName }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Priority">{{ step1.getRawValue().priority }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Description">{{ step1.getRawValue().description || '—' }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Assigned To">{{ step2.getRawValue().assignedTo }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Due Date">{{ dueDateDisplay }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Notes">{{ step2.getRawValue().notes || '—' }}</nz-descriptions-item>
+        </nz-descriptions>
+      </div>
+    }
+  </div>
 
-<!-- Nav buttons -->
-<div class="wizard-nav">
-  @if (currentStep() > 0) {
-    <button nz-button nzType="default" (click)="prev()">
-      <nz-icon nzType="left" nzTheme="outline" /> Previous
-    </button>
-  }
+  <!-- Nav buttons -->
+  <div class="wizard-nav">
+    @if (currentStep() > 0) {
+      <button nz-button nzType="default" (click)="prev()">
+        <nz-icon nzType="left" nzTheme="outline" /> Previous
+      </button>
+    }
 
-  <span class="spacer"></span>
+    <span class="spacer"></span>
 
-  @if (currentStep() < 2) {
-    <button nz-button nzType="primary" (click)="next()">
-      Next <nz-icon nzType="right" nzTheme="outline" />
-    </button>
-  }
+    @if (currentStep() < 2) {
+      <button nz-button nzType="primary" (click)="next()">
+        Next <nz-icon nzType="right" nzTheme="outline" />
+      </button>
+    }
 
-  @if (currentStep() === 2) {
-    <button nz-button nzType="primary" (click)="submit()">
-      <nz-icon nzType="check" nzTheme="outline" /> Submit
-    </button>
-  }
+    @if (currentStep() === 2) {
+      <button nz-button nzType="primary" (click)="submit()">
+        <nz-icon nzType="check" nzTheme="outline" /> Submit
+      </button>
+    }
+  </div>
 </div>

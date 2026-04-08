@@ -34,6 +34,21 @@
   display: block;
 }
 
+.icon-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #1b3f8b 0%, #2f65c4 100%);
+}
+
+.banner-icon {
+  font-size: 56px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .notes {
   margin: 0;
   font-size: 14px;
@@ -45,4 +60,6 @@
   .header { flex-direction: column; }
   .title  { font-size: 20px; }
   .task-image { max-height: 200px; }
+  .icon-banner { height: 100px; }
+  .banner-icon { font-size: 40px; }
 }
