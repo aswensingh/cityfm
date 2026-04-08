@@ -50,6 +50,10 @@ export class DashboardComponent implements OnInit {
     return { High: 'red', Medium: 'gold', Low: 'default' }[p];
   }
 
+  taskIcon(id: number): string {
+    return this.taskService.taskIcon(id);
+  }
+
   viewTask(id: number) {
     this.router.navigate(['/app/tasks', id]);
   }

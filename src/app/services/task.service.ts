@@ -9,7 +9,17 @@ export class TaskService {
 
   readonly tasks = this.tasksSignal.asReadonly();
 
+  private readonly icons = [
+    'project', 'code', 'bug', 'experiment', 'tool',
+    'rocket', 'bulb', 'flag', 'star', 'thunderbolt',
+  ];
+
   constructor(private http: HttpClient) {}
+
+  /** Returns a deterministic ng-zorro icon name for a task ID */
+  taskIcon(id: number): string {
+    return this.icons[id % this.icons.length];
+  }
 
   loadTasks() {
     if (this.loaded) return;
@@ -18,10 +28,6 @@ export class TaskService {
       this.tasksSignal.set(data.tasks);
       this.loaded = true;
     });
-  }
-
-  getTask(id: number) {
-    return computed(() => this.tasksSignal().find(t => t.id === id));
   }
 
   updateTask(id: number, changes: Partial<Task>) {

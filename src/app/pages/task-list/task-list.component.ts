@@ -79,6 +79,10 @@ export class TaskListComponent implements OnInit {
     return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   }
 
+  taskIcon(id: number): string {
+    return this.taskService.taskIcon(id);
+  }
+
   viewTask(id: number) { this.router.navigate(['/app/tasks', id]); }
   editTask(id: number) { this.router.navigate(['/app/tasks', id, 'edit']); }
   createTask()         { this.router.navigate(['/app/tasks/create']); }

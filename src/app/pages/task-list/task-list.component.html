@@ -44,6 +44,7 @@
         <tr>
           <td>{{ i + 1 }}</td>
           <td>
+            <nz-icon [nzType]="taskIcon(task.id)" nzTheme="outline" class="task-icon" />
             <a class="task-link" (click)="viewTask(task.id)">{{ task.name }}</a>
           </td>
           <td class="desc-cell">{{ task.description || '—' }}</td>
@@ -78,6 +79,7 @@
   @for (task of filteredTasks(); track task.id) {
     <nz-card class="task-card" [nzBodyStyle]="{ padding: '10px 14px' }">
       <div class="task-card-top">
+        <nz-icon [nzType]="taskIcon(task.id)" nzTheme="outline" class="task-icon" />
         <span class="task-card-name" (click)="viewTask(task.id)">{{ task.name }}</span>
         <div class="task-card-actions">
           <button nz-button nzType="link" nzSize="small" (click)="viewTask(task.id)" title="View">

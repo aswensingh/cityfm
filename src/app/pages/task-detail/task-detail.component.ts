@@ -28,17 +28,12 @@ export class TaskDetailComponent implements OnInit {
   task = computed(() => this.taskService.tasks().find(t => t.id === this.id()) ?? null);
   imgFailed = signal(false);
 
-  private icons = [
-    'project', 'code', 'bug', 'experiment', 'tool',
-    'rocket', 'bulb', 'flag', 'star', 'thunderbolt',
-  ];
-
   ngOnInit() {
     this.taskService.loadTasks();
   }
 
   taskIcon(id: number): string {
-    return this.icons[id % this.icons.length];
+    return this.taskService.taskIcon(id);
   }
 
   statusColor(status: string): string {

@@ -89,6 +89,7 @@
   @for (task of recentTasks(); track task.id) {
     <nz-card class="task-card" [nzBodyStyle]="{ padding: '10px 14px' }" (click)="viewTask(task.id)">
       <div class="task-card-top">
+        <nz-icon [nzType]="taskIcon(task.id)" nzTheme="outline" class="task-icon" />
         <span class="task-card-name">{{ task.name }}</span>
         <nz-icon nzType="right" nzTheme="outline" class="task-card-arrow" />
       </div>
@@ -117,7 +118,7 @@
     <tbody>
       @for (task of recentTable.data; track task.id) {
         <tr>
-          <td>{{ task.name }}</td>
+          <td><nz-icon [nzType]="taskIcon(task.id)" nzTheme="outline" class="task-icon" /> {{ task.name }}</td>
           <td><nz-tag [nzColor]="statusColor(task.status)">{{ task.status }}</nz-tag></td>
           <td><nz-tag [nzColor]="priorityColor(task.priority)">{{ task.priority }}</nz-tag></td>
           <td>{{ task.assignedTo }}</td>
