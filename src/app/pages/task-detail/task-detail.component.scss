@@ -17,8 +17,25 @@
 
 .tags {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px !important;
+
+  nz-icon {
+    font-size: 14px;
+  }
+
+  .tag-label {
+    font-weight: 600;
+    opacity: 0.9;
+  }
 }
 
 .image-wrap {

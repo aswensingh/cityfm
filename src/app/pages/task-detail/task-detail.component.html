@@ -10,8 +10,14 @@
     <div>
       <h1 class="title">{{ task.name }}</h1>
       <div class="tags">
-        <nz-tag [nzColor]="statusColor(task.status)">{{ task.status }}</nz-tag>
-        <nz-tag [nzColor]="priorityColor(task.priority)">{{ task.priority }}</nz-tag>
+        <nz-tag [nzColor]="statusColor(task.status)" class="tag-item">
+          <nz-icon nzType="check-circle" nzTheme="outline"></nz-icon>
+          <span class="tag-label">Status:</span> {{ task.status }}
+        </nz-tag>
+        <nz-tag [nzColor]="priorityColor(task.priority)" class="tag-item">
+          <nz-icon nzType="flag" nzTheme="outline"></nz-icon>
+          <span class="tag-label">Priority:</span> {{ task.priority }}
+        </nz-tag>
       </div>
     </div>
     <button nz-button nzType="primary" (click)="editTask()">
