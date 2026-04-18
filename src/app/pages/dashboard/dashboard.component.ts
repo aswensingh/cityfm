@@ -7,8 +7,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { TaskService } from '../../services/task.service';
-import { AuthService } from '../../services/auth.service';
+import { TaskService } from '../../services/task/task.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { TaskPriority } from '../../models/task.model';
 
 @Component({

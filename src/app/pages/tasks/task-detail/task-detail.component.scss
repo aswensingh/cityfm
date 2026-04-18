@@ -1,3 +1,6 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
 .nav { margin-bottom: 16px; }
 
 .header {
@@ -40,7 +43,7 @@
 
 .image-wrap {
   margin-bottom: 24px;
-  border-radius: 8px;
+  border-radius: v.$radius-md;
   overflow: hidden;
 }
 
@@ -52,25 +55,23 @@
 }
 
 .icon-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   height: 160px;
-  border-radius: 8px;
+  border-radius: v.$radius-md;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #1b3f8b 0%, #2f65c4 100%);
+  background: v.$gradient-primary;
 }
 
 .banner-icon {
   font-size: 56px;
-  color: rgba(255, 255, 255, 0.8);
+  color: v.$banner-icon-color;
 }
 
 .notes {
   margin: 0;
   font-size: 14px;
   line-height: 1.6;
-  color: #595959;
+  color: v.$color-text-secondary;
 }
 
 @media (max-width: 768px) {

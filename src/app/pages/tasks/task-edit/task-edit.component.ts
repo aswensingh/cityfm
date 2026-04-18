@@ -7,9 +7,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { TaskService } from '../../services/task.service';
-import { ToastService } from '../../services/toast.service';
-import { TaskStatus, TaskPriority } from '../../models/task.model';
+import { TaskService } from '../../../services/task/task.service';
+import { ToastService } from '../../../services/toast/toast.service';
+import { TaskStatus, TaskPriority } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-edit',

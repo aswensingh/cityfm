@@ -1,9 +1,11 @@
+@use 'variables' as v;
+
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1b3f8b 0%, #2f65c4 50%, #00b4d8 100%);
+  background: v.$gradient-login;
   padding: 16px;
   position: relative;
   overflow: hidden;
@@ -22,8 +24,8 @@
 .login-card {
   width: 100%;
   max-width: 400px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-login;
   position: relative;
   z-index: 1;
 }
@@ -35,14 +37,14 @@
   h1 {
     font-size: 32px;
     font-weight: 800;
-    color: #1b3f8b;
+    color: v.$color-primary;
     margin: 0 0 4px;
     letter-spacing: 2px;
   }
 
   p {
     font-size: 14px;
-    color: #595959;
+    color: v.$color-text-secondary;
     margin: 0;
   }
 }
@@ -50,7 +52,7 @@
 .hint {
   text-align: center;
   font-size: 12px;
-  color: #8c8c8c;
+  color: v.$color-text-muted;
   margin-top: 16px;
   margin-bottom: 0;
 }
@@ -58,7 +60,7 @@
 @media (max-width: 480px) {
   .login-card {
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: v.$radius-md;
   }
 
   .branding h1 {

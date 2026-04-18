@@ -2,7 +2,7 @@ import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,7 +11,10 @@ export class AuthService {
   readonly currentUser = this.userSignal.asReadonly();
   readonly isLoggedIn = computed(() => this.userSignal() !== null);
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   // Ideally login should be handled by BE API
   login(username: string, password: string) {

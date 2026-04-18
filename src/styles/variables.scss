@@ -1,0 +1,46 @@
+// Brand
+$color-primary:       #1b3f8b;
+$color-primary-light: #2f65c4;
+$color-accent:        #00b4d8;
+
+// Status
+$color-success: #52c41a;
+$color-warning: #faad14;
+$color-danger:  #ff4d4f;
+$color-info:    #1890ff;
+
+// Text
+$color-text:           #1a1a2e;
+$color-text-dark:      #262626;
+$color-text-secondary: #595959;
+$color-text-muted:     #8c8c8c;
+
+// Surfaces & borders
+$color-white:      #fff;
+$color-bg:         #f0f2f5;
+$color-hover-bg:   #f5f5f5;
+$color-border:     #f0f0f0;
+$color-muted-icon: #bfbfbf;
+$color-active-bg:  #e6f0ff;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+$gradient-login:   linear-gradient(135deg, $color-primary 0%, $color-primary-light 50%, $color-accent 100%);
+
+// Border radius
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+
+// Shadows
+$shadow-card:   0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-login:  0 8px 32px rgba(0, 0, 0, 0.18);
+$shadow-topbar: 0 1px 4px rgba(0, 0, 0, 0.08);
+$shadow-fab:    0 4px 12px rgba($color-primary, 0.4);
+$shadow-active: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+// Sidebar
+$sidebar-border:    rgba(255, 255, 255, 0.1);
+$sidebar-text:      rgba(255, 255, 255, 0.85);
+$sidebar-text-dim:  rgba(255, 255, 255, 0.65);
+$banner-icon-color: rgba(255, 255, 255, 0.8);

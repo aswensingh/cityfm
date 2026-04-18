@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
-import { authGuard } from './services/auth.guard';
+import { authGuard } from './services/auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -20,19 +20,19 @@ export const routes: Routes = [
       },
       {
         path: 'tasks',
-        loadComponent: () => import('./pages/task-list/task-list.component').then(m => m.TaskListComponent),
+        loadComponent: () => import('./pages/tasks/task-list/task-list.component').then(m => m.TaskListComponent),
       },
       {
         path: 'tasks/create',
-        loadComponent: () => import('./pages/task-create/task-create.component').then(m => m.TaskCreateComponent),
+        loadComponent: () => import('./pages/tasks/task-create/task-create.component').then(m => m.TaskCreateComponent),
       },
       {
         path: 'tasks/:id',
-        loadComponent: () => import('./pages/task-detail/task-detail.component').then(m => m.TaskDetailComponent),
+        loadComponent: () => import('./pages/tasks/task-detail/task-detail.component').then(m => m.TaskDetailComponent),
       },
       {
         path: 'tasks/:id/edit',
-        loadComponent: () => import('./pages/task-edit/task-edit.component').then(m => m.TaskEditComponent),
+        loadComponent: () => import('./pages/tasks/task-edit/task-edit.component').then(m => m.TaskEditComponent),
       },
     ],
   },

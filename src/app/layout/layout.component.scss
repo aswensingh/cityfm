@@ -1,3 +1,6 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
 .full-height {
   min-height: 100vh;
 }
@@ -11,21 +14,19 @@
 
 .logo {
   height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+  @include m.flex-center;
+  color: v.$color-white;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 1px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid v.$sidebar-border;
 }
 
 .logo-icon {
   height: 36px;
   width: 36px;
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: v.$radius-sm;
 }
 
 .sidebar-footer {
@@ -37,34 +38,32 @@
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid v.$sidebar-border;
 }
 
 .sidebar-name {
-  color: rgba(255, 255, 255, 0.85);
+  color: v.$sidebar-text;
   font-size: 13px;
   flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @include m.text-truncate;
 }
 
 .logout-btn {
-  color: rgba(255, 255, 255, 0.65);
+  color: v.$sidebar-text-dim;
   margin-left: auto;
 
   &:hover {
-    color: #ff4d4f;
+    color: v.$color-danger;
   }
 }
 
 .topbar {
-  background: #fff;
+  background: v.$color-white;
   padding: 0 16px;
   display: flex;
   align-items: center;
   height: 64px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: v.$shadow-topbar;
 }
 
 .content {
@@ -79,7 +78,7 @@
 .mobile-brand {
   font-size: 18px;
   font-weight: 700;
-  color: #1b3f8b;
+  color: v.$color-primary;
 }
 
 .mobile-content {
@@ -87,7 +86,6 @@
 }
 
 /* --- Mobile drawer --- */
-
 
 .drawer-wrap {
   display: flex;
@@ -100,18 +98,18 @@
   align-items: center;
   gap: 12px;
   padding: 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid v.$color-border;
 }
 
 .drawer-user-name {
   font-size: 15px;
   font-weight: 600;
-  color: #262626;
+  color: v.$color-text-dark;
 }
 
 .drawer-user-role {
   font-size: 12px;
-  color: #8c8c8c;
+  color: v.$color-text-muted;
   margin-top: 1px;
 }
 
@@ -128,21 +126,21 @@
   gap: 10px;
   padding: 11px 20px;
   font-size: 14px;
-  color: #262626;
+  color: v.$color-text-dark;
   cursor: pointer;
   transition: background 0.15s ease;
   text-decoration: none;
   border-left: 3px solid transparent;
 
   &:hover, &:active {
-    background: #f5f5f5;
+    background: v.$color-hover-bg;
   }
 
   &.active {
-    color: #1b3f8b;
+    color: v.$color-primary;
     font-weight: 600;
-    background: #e6f0ff;
-    border-left-color: #1b3f8b;
+    background: v.$color-active-bg;
+    border-left-color: v.$color-primary;
   }
 }
 

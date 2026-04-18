@@ -9,8 +9,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NgxParticlesModule, IParticlesProps } from '@tsparticles/angular';
 import { Engine } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
-import { AuthService } from '../../services/auth.service';
-import { ToastService } from '../../services/toast.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-login',

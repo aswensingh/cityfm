@@ -8,7 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -42,17 +42,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  navigateTo(path: string) {
-    this.router.navigate([path]);
-    this.drawerOpen.set(false);
-  }
-
   logout() {
     this.drawerOpen.set(false);
     this.auth.logout();
-  }
-
-  getInitials(name: string): string {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   }
 }

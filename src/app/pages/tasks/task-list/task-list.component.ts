@@ -8,8 +8,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { TaskService } from '../../services/task.service';
-import { Task, TaskPriority, TaskStatus } from '../../models/task.model';
+import { TaskService } from '../../../services/task/task.service';
+import { Task, TaskPriority, TaskStatus } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-list',

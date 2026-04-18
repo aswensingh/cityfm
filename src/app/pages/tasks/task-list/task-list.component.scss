@@ -1,3 +1,6 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
 .toolbar {
   display: flex;
   align-items: center;
@@ -9,7 +12,7 @@
 .search-box { max-width: 320px; flex: 1; }
 
 .task-link {
-  color: #1b3f8b;
+  color: v.$color-primary;
   cursor: pointer;
   font-weight: 500;
   &:hover { text-decoration: underline; }
@@ -21,23 +24,17 @@
   gap: 8px;
 }
 
-/* Description & notes cells — truncate long text */
 .desc-cell, .notes-cell {
   max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  @include m.text-truncate;
   font-size: 13px;
-  color: #595959;
+  color: v.$color-text-secondary;
 }
 
-/* Horizontal scroll for the wider table */
 .desktop-task-table {
   display: block;
   overflow-x: auto;
 }
-
-/* --- Create Task button: inline on desktop, FAB on mobile --- */
 
 .create-fab {
   display: none;
@@ -55,16 +52,14 @@
   }
 
   .create-fab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include m.flex-center;
     position: fixed;
     bottom: 24px;
     right: 24px;
     z-index: 10;
     width: 48px;
     height: 48px;
-    box-shadow: 0 4px 12px rgba(27, 63, 139, 0.4);
+    box-shadow: v.$shadow-fab;
   }
 
   .desktop-task-table {
@@ -78,8 +73,8 @@
   }
 
   .task-card {
-    border-radius: 8px;
-    border-left: 3px solid #1b3f8b;
+    border-radius: v.$radius-md;
+    border-left: 3px solid v.$color-primary;
   }
 
   .task-card-top {
@@ -92,11 +87,9 @@
   .task-card-name {
     font-weight: 600;
     font-size: 14px;
-    color: #1b3f8b;
+    color: v.$color-primary;
     cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    @include m.text-truncate;
     flex: 1;
     margin-right: 4px;
   }
@@ -115,13 +108,13 @@
 
   .task-card-meta {
     font-size: 12px;
-    color: #8c8c8c;
+    color: v.$color-text-muted;
     margin-left: auto;
   }
 
   .task-card-desc {
     font-size: 12px;
-    color: #595959;
+    color: v.$color-text-secondary;
     margin-top: 6px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -133,7 +126,7 @@
     display: flex;
     gap: 12px;
     font-size: 11px;
-    color: #8c8c8c;
+    color: v.$color-text-muted;
     margin-top: 6px;
   }
 
@@ -142,7 +135,7 @@
     align-items: center;
     gap: 4px;
     font-size: 11px;
-    color: #8c8c8c;
+    color: v.$color-text-muted;
     margin-top: 4px;
     font-style: italic;
   }
